@@ -1,4 +1,9 @@
-module MyLib (someFunc) where
+module MyLib (getDigitsInEntries, f) where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+import Data.Char
+
+getDigitsInEntries :: [[Char]] -> [[Char]]
+getDigitsInEntries = map (filter isDigit)
+
+f :: [[a]] -> [a] 
+f x = head x ++ last x
