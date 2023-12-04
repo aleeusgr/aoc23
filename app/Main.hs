@@ -1,8 +1,8 @@
 module Main where
 
 --import qualified MyLib (someFunc)
-task1 :: [Char] -> [String]
-task1 dt = 
+splitLines :: [Char] -> [String]
+splitLines dt = 
   let
     contents = lines dt
   in
@@ -11,5 +11,5 @@ task1 dt =
 main :: IO ()
 main = do
   dt <- readFile "inputs/1"
-  print $ task1 dt
+  print $ splitLines dt
   
