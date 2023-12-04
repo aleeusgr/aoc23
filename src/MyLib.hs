@@ -1,4 +1,4 @@
-module MyLib (getDigitsInEntries, convertToCalibrationValues) where
+module MyLib (getCalibrationValues) where
 
 import Data.Char
 
@@ -12,3 +12,5 @@ convertToCalibrationValues xs =
     l = [last xs]
   in 
     h ++ l
+getCalibrationValues :: [[Char]] -> [[Char]]
+getCalibrationValues xs = map convertToCalibrationValues $ getDigitsInEntries xs
