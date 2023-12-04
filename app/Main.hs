@@ -10,12 +10,12 @@ splitLines dt =
   in
     contents
 
-getDigitsInElement :: [[Char]] -> [[Char]]
-getDigitsInElement = map (filter isDigit)
+getDigitsInEntries :: [[Char]] -> [[Char]]
+getDigitsInEntries = map (filter isDigit)
   
 
 main :: IO ()
 main = do
   dt <- readFile "inputs/1"
-  print $ getDigitsInElement $ splitLines dt
+  print $ getDigitsInEntries $ splitLines dt
   
