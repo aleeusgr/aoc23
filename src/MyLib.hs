@@ -1,14 +1,14 @@
-module MyLib (getDigitsInEntries, dropMiddleDigits) where
+module MyLib (getDigitsInEntries, convertToCalibrationValues) where
 
 import Data.Char
 
 getDigitsInEntries :: [[Char]] -> [[Char]]
 getDigitsInEntries = map (filter isDigit)
 
-dropMiddleDigits :: [Char] -> [Char] 
-dropMiddleDigits x = 
+convertToCalibrationValues :: [Char] -> [Char]
+convertToCalibrationValues xs =
   let 
-    h = [head x]
-    l = [last x]
+    h = [head xs]
+    l = [last xs]
   in 
     h ++ l
