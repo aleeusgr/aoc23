@@ -1,9 +1,9 @@
 module Main where
 
-import qualified MyLib (getDigitsInEntries, f)
+import qualified MyLib (getDigitsInEntries, dropMiddleDigits)
 
 main :: IO ()
 main = do
   dt <- readFile "inputs/1"
-  print $ MyLib.getDigitsInEntries $ lines dt
+  print $ map MyLib.dropMiddleDigits $ MyLib.getDigitsInEntries $ lines dt
   
