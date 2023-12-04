@@ -123,7 +123,7 @@ test-suite aoc23-test
 
     -- Test dependencies.
     build-depends:
-        base ^>=4.17.2.1,
-	tasty ^>=1.4,
-	tasty-hunit ^>=0.10.0,
-        aoc23
+        base ^>=4.17.2.1
+      ,	tasty ^>=1.4
+      , tasty-hunit ^>=0.10.0
+      , aoc23
