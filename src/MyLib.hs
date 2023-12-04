@@ -8,5 +8,8 @@ getDigitsInEntries = map (filter isDigit)
 convertToCalibrationValues :: [Char] -> [Char]
 convertToCalibrationValues xs = head xs : [last xs]
 
-getCalibrationValues :: [[Char]] -> [[Char]]
-getCalibrationValues xs = map convertToCalibrationValues $ getDigitsInEntries xs
+intList :: [String] -> [Int]
+intList = map (read::String->Int)
+
+getCalibrationValues :: [[Char]] -> [Int]
+getCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries xs
