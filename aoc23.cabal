@@ -94,7 +94,6 @@ executable aoc23
     -- Other library packages from which modules are imported.
     build-depends:
         base ^>=4.17.2.1,
-	split >= 0.1,
         aoc23
 
     -- Base language which the package is written in.
