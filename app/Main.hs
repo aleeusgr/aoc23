@@ -1,11 +1,15 @@
 module Main where
 
 --import qualified MyLib (someFunc)
-import Data.List.Split
+task1 :: [Char] -> [String]
+task1 dt = 
+  let
+    contents = lines dt
+  in
+    contents
 
 main :: IO ()
 main = do
   dt <- readFile "inputs/1"
-  contents <- lines dt 
-  print contents
+  print $ task1 dt
   
