@@ -1,19 +1,16 @@
 import Test.Tasty
 import Test.Tasty.HUnit
+import qualified MyLib (getCalibrationValues)
 
-import Data.List
-import Data.Ord
+tests :: IO String -> TestTree
+tests lsIO = testGroup "tests"
+    [ testCase "task1: the sum of calibration numbers is correct" $ 
+    sum ( MyLib.getCalibrationValues $ lines lsIO) @?= 56397 
+    ]
 
-main = defaultMain tests
+main :: IO ()
+main = defaultMain (withResource acquire tests)
 
-tests :: TestTree
-tests = testGroup "Tests" [ unitTests]
+acquire :: IO [String]
+acquire = read <$> readFile "inputs/1"
 
-unitTests = testGroup "Unit tests"
-  [ testCase "List comparison (different length)" $
-      [1, 2, 3] `compare` [1,2] @?= GT
-
-  -- the following test does not hold
-  , testCase "List comparison (same length)" $
-      [1, 2, 3] `compare` [1,2,2] @?= LT
-  ]
