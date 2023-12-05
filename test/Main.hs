@@ -6,13 +6,20 @@ import qualified MyLib (getCalibrationValues)
 -- acquire :: IO [String]
 -- acquire = read <$> readFile "inputs/1"
 
-testVals :: [String]
-testVals = ["1abc2", "pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet"]
+testVals1 :: [String]
+testVals1 = ["1abc2", "pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet"]
+
+testVals2 :: [String]
+testVals2 = ["two1nine", "eightwothree", "abcone2threexyz", "xtwone3four",
+             "4nineeightseven2", "zoneight234", "7pqrstsixteen"]
 
 tests :: TestTree
 tests  = testGroup "tests"
     [ testCase "task1: the sum of calibration numbers is correct" $ 
-    sum ( MyLib.getCalibrationValues testVals) @?= 142  
+    sum ( MyLib.getCalibrationValues testVals1) @?= 142
+    ,
+    testCase "task2: getCorrectedCalibrationValues can parse words" $
+    sum ( MyLib.getCalibrationValues testVals2) @?= 281
     ]
 
 main :: IO ()

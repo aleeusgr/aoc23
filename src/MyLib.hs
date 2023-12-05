@@ -13,3 +13,5 @@ intList = map (read::String->Int)
 
 getCalibrationValues :: [[Char]] -> [Int]
 getCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries xs
+
+-- getCorrectedCalibrationValues :: [[Char]] -> [Int]
