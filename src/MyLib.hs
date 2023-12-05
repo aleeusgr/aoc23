@@ -21,12 +21,29 @@ myWords = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine
 testVals2 :: [String]
 testVals2 = ["two1nine", "eightwothree", "abcone2threexyz", "xtwone3four",
              "4nineeightseven2", "zoneight234", "7pqrstsixteen"]
+--
+-- type digitWords = "one" | "two" | "three" | "four" | "five"| "six"| "seven"| "eight"| "nine"| "zero"
 
 -- tests with:
 -- findString (myWords !! 1) (head testVals2)
+-- the inputs of the function must belong to Eq TypeClass,
+-- the function returns the index of the first letter of the word.
+
 findString :: (Eq a) => [a] -> [a] -> Maybe Int
 findString search str = findIndex (isPrefixOf search) (tails str)
 
+-- get the length of the word
+-- wordLength :: [Char] -> Int
+-- wordLength = 
+
+
+-- getNumber :: digitWord -> [Char]
+-- getNumber = 
+
+-- take part of the String from the beginning to the output of the findString and
+-- add the number symbol
+-- take the part from the beginning + length of the word
+-- add to the result
 
 -- :: "eighttwothree" -> "8twothree" -> "823"
 -- :: "zoneight234" -> "z1ight234"
