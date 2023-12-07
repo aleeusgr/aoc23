@@ -1,4 +1,4 @@
-module MyLib (getCalibrationValues, Digits(..), findString ) where
+module MyLib (getCalibrationValues, Digits(..), replace ) where
 
 import Data.Char
 import Data.List
@@ -16,8 +16,7 @@ intList = map (read::String->Int)
 getCalibrationValues :: [[Char]] -> [Int]
 getCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries xs
 
--- data TestVals2 = {"two1nine"  "eightwothree"  "abcone2threexyz"  "xtwone3four"  "4nineeightseven2"  "zoneight234"  "7pqrstsixteen"}
---
+testVals2 = ["two1nine" , "eightwothree" , "abcone2threexyz", "xtwone3four", "4nineeightseven2", "zoneight234", "7pqrstsixteen"]
 data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten deriving (Show, Enum)
 -- "one" "two"  "three"  "four"  "five"  "six"  "seven"  "eight"  "nine"  "zero"
 
@@ -28,8 +27,16 @@ data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nin
 findString :: (Eq a) => [a] -> [a] -> Int
 findString search str = fromJust $ findIndex (isPrefixOf search) (tails str)
 
--- replaceString i o xs = 
---   idx = fromJust $ findString i xs
+replace n dt = 
+  let
+    pos = findString (show n) dt
+    digit = show (fromEnum n)
+    word = map toLower (show n)
+  in take pos dt ++ digit ++ drop (length word) dt
+
+
+
+-- replaceString i xs = 
 
 -- get the length of the word
 -- wordLength :: [Char] -> Int
