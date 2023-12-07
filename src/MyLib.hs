@@ -27,12 +27,12 @@ data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nin
 findString :: (Eq a) => [a] -> [a] -> Int
 findString search str = fromJust $ findIndex (isPrefixOf search) (tails str)
 
-replace n dt = 
+replace n str = 
   let
-    pos = findString (show n) dt
-    digit = show (fromEnum n)
-    word = map toLower (show n)
-  in take pos dt ++ digit ++ drop (length word) dt
+  pos = findString (show n) str
+  digit = show (fromEnum n)
+  word = map toLower (show n)
+  in take pos str ++ digit ++ drop (length word) str
 
 
 
