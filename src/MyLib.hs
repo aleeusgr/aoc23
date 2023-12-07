@@ -29,7 +29,7 @@ findString search str = fromJust $ findIndex (isPrefixOf search) (tails str)
 
 replace n str = 
   let
-  pos = findString (show n) str
+  pos = findString word str
   digit = show (fromEnum n)
   word = map toLower (show n)
   in take pos str ++ digit ++ drop (length word) str
