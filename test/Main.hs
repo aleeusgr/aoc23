@@ -26,7 +26,10 @@ tests  = testGroup "tests"
     map toLower (show MyLib.Two) @?= "two"
     ,
     testCase "task2: replace two with 2" $ 
-    MyLib.replace MyLib.Two (head testVals2)  @?= "21nine"
+    MyLib.replace MyLib.Two (testVals2 !! 1)  @?= "21nine"
+    ,
+    testCase "task2: replace two with 2 in eighttwothree" $
+    MyLib.replace MyLib.Two (testVals2 !! 1)  @?= "eight2three"
     ,
     testCase "task2: replace nine with 9" $ 
     MyLib.replace MyLib.Nine (head testVals2)  @?= "two19"
