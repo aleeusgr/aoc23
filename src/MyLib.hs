@@ -27,6 +27,7 @@ data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nin
 findString :: (Eq a) => [a] -> [a] -> Int
 findString search str = fromJust $ findIndex (isPrefixOf search) (tails str)
 
+replace :: (Show p, Enum p) => p -> [Char] -> [Char]
 replace n str = 
   let
   pos = findString word str
