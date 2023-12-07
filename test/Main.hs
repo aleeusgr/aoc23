@@ -1,7 +1,8 @@
 import Test.Tasty
 import Test.Tasty.HUnit
 import Data.Char
-import qualified MyLib (getCalibrationValues, Digits(..) )
+import Data.Maybe
+import qualified MyLib (getCalibrationValues, Digits(..), findString)
 
 -- TODO: make it work and have task one validate 56397
 -- acquire :: IO [String]
@@ -25,6 +26,9 @@ tests  = testGroup "tests"
     ,
     testCase "task2: Digits can show words" $
     map toLower (show MyLib.Two) @?= "two"
+    ,
+    testCase "task2: findString" $ do
+    fromJust (MyLib.findString (map toLower  (show MyLib.Two)) (head testVals2 )) @?= 0
     ,
     testCase "task2: getCorrectedCalibrationValues can parse words" $
     sum ( MyLib.getCalibrationValues testVals2) @?= 281
