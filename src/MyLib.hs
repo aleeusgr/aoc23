@@ -17,7 +17,7 @@ getCalibrationValues :: [[Char]] -> [Int]
 getCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries xs
 
 testVals2 = ["two1nine" , "eightwothree" , "abcone2threexyz", "xtwone3four", "4nineeightseven2", "zoneight234", "7pqrstsixteen"]
-data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten deriving (Show, Enum)
+data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nine deriving (Show, Enum)
 -- "one" "two"  "three"  "four"  "five"  "six"  "seven"  "eight"  "nine"  "zero"
 
 
@@ -35,23 +35,7 @@ replace n str =
   word = map toLower (show n)
   in take pos str ++ digit ++ drop (length word) str
 
-
-
--- replaceString i xs = 
-
--- get the length of the word
--- wordLength :: [Char] -> Int
--- wordLength = 
-
-
--- getNumber :: digitWord -> [Char]
--- getNumber = 
-
--- take part of the String from the beginning to the output of the findString and
--- add the number symbol
--- take the part from the beginning + length of the word
--- add to the result
-
+-- :: "two1nine" -> "21nine"
 -- :: "eighttwothree" -> "8twothree" -> "823"
 -- :: "zoneight234" -> "z1ight234"
 -- getCorrectedCalibrationValues :: [[Char]] -> [Int]
