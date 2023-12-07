@@ -1,4 +1,4 @@
-module MyLib (getCalibrationValues) where
+module MyLib (getCalibrationValues, Digits(..) ) where
 
 import Data.Char
 import Data.List
@@ -15,18 +15,13 @@ intList = map (read::String->Int)
 getCalibrationValues :: [[Char]] -> [Int]
 getCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries xs
 
-myWords :: [String]
-myWords = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "zero"]
-
-testVals2 :: [String]
-testVals2 = ["two1nine", "eightwothree", "abcone2threexyz", "xtwone3four",
-             "4nineeightseven2", "zoneight234", "7pqrstsixteen"]
+-- data TestVals2 = {"two1nine"  "eightwothree"  "abcone2threexyz"  "xtwone3four"  "4nineeightseven2"  "zoneight234"  "7pqrstsixteen"}
 --
--- type digitWords = "one" | "two" | "three" | "four" | "five"| "six"| "seven"| "eight"| "nine"| "zero"
+data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten deriving (Show, Enum)
+-- "one" "two"  "three"  "four"  "five"  "six"  "seven"  "eight"  "nine"  "zero"
 
--- tests with:
--- findString (myWords !! 1) (head testVals2)
--- the inputs of the function must belong to Eq TypeClass,
+
+-- the inputs of the function must belong to Eq TypeClass 
 -- the function returns the index of the first letter of the word.
 
 findString :: (Eq a) => [a] -> [a] -> Maybe Int
