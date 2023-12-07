@@ -2,6 +2,7 @@ module MyLib (getCalibrationValues, Digits(..), findString ) where
 
 import Data.Char
 import Data.List
+import Data.Maybe
 
 getDigitsInEntries :: [[Char]] -> [[Char]]
 getDigitsInEntries = map (filter isDigit)
@@ -24,8 +25,11 @@ data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nin
 -- the inputs of the function must belong to Eq TypeClass 
 -- the function returns the index of the first letter of the word.
 
-findString :: (Eq a) => [a] -> [a] -> Maybe Int
-findString search str = findIndex (isPrefixOf search) (tails str)
+findString :: (Eq a) => [a] -> [a] -> Int
+findString search str = fromJust $ findIndex (isPrefixOf search) (tails str)
+
+-- replaceString i o xs = 
+--   idx = fromJust $ findString i xs
 
 -- get the length of the word
 -- wordLength :: [Char] -> Int
