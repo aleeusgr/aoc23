@@ -25,10 +25,13 @@ tests  = testGroup "tests"
     testCase "task2: Digits can show words" $
     map toLower (show MyLib.Two) @?= "two"
     ,
-    testCase "task2: replace" $ 
+    testCase "task2: replace two with 2" $ 
     MyLib.replace MyLib.Two (head testVals2)  @?= "21nine"
     ,
-    testCase "task2: getCorrectedCalibrationValues can parse words" $
+    testCase "task2: replace nine with 9" $ 
+    MyLib.replace MyLib.Nine (head testVals2)  @?= "two19"
+    ,
+    testCase "task2: getCorrectedCalibrationValues" $
     sum ( MyLib.getCalibrationValues testVals2) @?= 281
     ]
 

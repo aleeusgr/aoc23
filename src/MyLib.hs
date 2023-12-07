@@ -17,6 +17,9 @@ getCalibrationValues :: [[Char]] -> [Int]
 getCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries xs
 
 testVals2 = ["two1nine" , "eightwothree" , "abcone2threexyz", "xtwone3four", "4nineeightseven2", "zoneight234", "7pqrstsixteen"]
+
+dt = head testVals2
+
 data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nine deriving (Show, Enum)
 -- "one" "two"  "three"  "four"  "five"  "six"  "seven"  "eight"  "nine"  "zero"
 
@@ -27,15 +30,15 @@ data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nin
 findString :: (Eq a) => [a] -> [a] -> Int
 findString search str = fromJust $ findIndex (isPrefixOf search) (tails str)
 
+-- :: "two1nine" -> Digit -> "21nine"
 replace :: (Show p, Enum p) => p -> [Char] -> [Char]
-replace n str = 
+replace n str  =
   let
   pos = findString word str
   digit = show (fromEnum n)
   word = map toLower (show n)
   in take pos str ++ digit ++ drop (length word) str
 
--- :: "two1nine" -> "21nine"
 -- :: "eighttwothree" -> "8twothree" -> "823"
 -- :: "zoneight234" -> "z1ight234"
 -- getCorrectedCalibrationValues :: [[Char]] -> [Int]
