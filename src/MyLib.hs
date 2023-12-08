@@ -22,17 +22,20 @@ dt = head testVals2
 
 data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nine deriving (Show, Enum)
 
-findString :: (Eq a) => [a] -> [a] -> Int
-findString search str = fromJust $ findIndex (isPrefixOf search) (tails str)
+findString :: (Eq a) => [a] -> [a] -> Maybe Int
+findString search str = findIndex (isPrefixOf search) (tails str)
 
 -- :: "two1nine" -> Digit -> "21nine"
 replace :: (Show p, Enum p) => p -> [Char] -> [Char]
 replace n str  =
   let
-  pos = findString word str
   digit = show (fromEnum n)
   word = map toLower (show n)
-  in take pos str ++ digit ++ drop (pos + length word) str
+  pos = findString word str 
+  result = if isJust pos then 
+    take (fromJust pos) str ++ digit ++ drop (fromJust pos + length word) str
+        else str 
+  in  result
 
 replaceAll str =
   let

@@ -19,7 +19,7 @@ tests  = testGroup "tests"
     sum ( MyLib.getCalibrationValues testVals1) @?= 142
     ,
     testCase "task2: replaceAll" $ 
-    MyLib.replaceAll (head testVals2)  @?= "21nine"
+    MyLib.replaceAll (head testVals2)  @?= "219"
     ,
     testCase "task2: getCorrectedCalibrationValues" $
     sum ( MyLib.getCalibrationValues testVals2) @?= 281
