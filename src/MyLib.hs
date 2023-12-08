@@ -51,13 +51,5 @@ replaceAll str =
   replaceEight = replace Eight replaceSeven
   in replace Nine replaceEight
 
+getCorrectedCalibrationValues :: [[Char]] -> [Int]
 getCorrectedCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries (map replaceAll xs)
-
--- fold the list of inputs on it fold the list of digits.
--- git the list of digits
-
--- :: "eightwothree" -> 8wothree" -> "8wo3"
--- :: "zoneight234" -> "z1ight234"
--- getCorrectedCalibrationValues :: [[Char]] -> [Int]
--- getCorrectedCalibrationValues  = findString $ replaceWordWithDigit
---
