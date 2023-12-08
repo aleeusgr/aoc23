@@ -1,4 +1,4 @@
-module MyLib (getCalibrationValues, Digits(..), replace, findString) where
+module MyLib (getCalibrationValues, Digits(..), replace) where
 
 import Data.Char
 import Data.List

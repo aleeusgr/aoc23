@@ -1,7 +1,6 @@
 import Test.Tasty
 import Test.Tasty.HUnit
-import Data.Char
-import qualified MyLib (getCalibrationValues, Digits(..), replace, findString)
+import qualified MyLib (getCalibrationValues, Digits(..), replace )
 
 -- TODO: make it work and have task one validate 56397
 -- acquire :: IO [String]
@@ -18,15 +17,6 @@ tests :: TestTree
 tests  = testGroup "tests"
     [ testCase "task1: the sum of calibration numbers is correct" $ 
     sum ( MyLib.getCalibrationValues testVals1) @?= 142
-    ,
-    testCase "task2: Digits can show digits" $
-    fromEnum MyLib.Two @?= 2
-    ,
-    testCase "task2: Digits can show words" $
-    map toLower (show MyLib.Two) @?= "two"
-    ,
-    testCase "task2: findString finds Two in head" $
-    MyLib.findString (map toLower (show MyLib.Two)) (head testVals2) @?= 0
     ,
     testCase "task2: replace two with 2" $ 
     MyLib.replace MyLib.Two (head testVals2)  @?= "21nine"
