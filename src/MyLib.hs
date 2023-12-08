@@ -37,13 +37,20 @@ replace n str  =
         else str 
   in  result
 
+replaceAll :: [Char] -> [Char]
 replaceAll str =
   let
   replaceZero = replace Zero str
-  -- replaceOne = replace One replaceZero
-  -- replaceTwo = replace Two replaceOne
-  -- replaceThree = replace Three replaceTwo
-  in replace One replaceZero
+  replaceOne = replace One replaceZero
+  replaceTwo = replace Two replaceOne
+  replaceThree = replace Three replaceTwo
+  replaceFour = replace Four replaceThree
+  replaceFive = replace Five replaceFour
+  replaceSix = replace Six replaceFive
+  replaceSeven = replace Seven replaceSix
+  replaceEight = replace Eight replaceSeven
+  in replace Nine replaceEight
+
 
 -- fold the list of inputs on it fold the list of digits.
 -- git the list of digits
