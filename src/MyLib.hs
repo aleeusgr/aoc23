@@ -1,4 +1,4 @@
-module MyLib (getCalibrationValues, Digits(..), replaceAll) where
+module MyLib (getCalibrationValues, Digits(..), getCorrectedCalibrationValues) where
 
 import Data.Char
 import Data.List
@@ -51,6 +51,7 @@ replaceAll str =
   replaceEight = replace Eight replaceSeven
   in replace Nine replaceEight
 
+getCorrectedCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries (map replaceAll xs)
 
 -- fold the list of inputs on it fold the list of digits.
 -- git the list of digits
