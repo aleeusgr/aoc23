@@ -1,4 +1,4 @@
-module MyLib (getCalibrationValues, Digits(..), replace) where
+module MyLib (getCalibrationValues, Digits(..), replaceAll) where
 
 import Data.Char
 import Data.List
@@ -21,11 +21,6 @@ testVals2 = ["two1nine" , "eightwothree" , "abcone2threexyz", "xtwone3four", "4n
 dt = head testVals2
 
 data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nine deriving (Show, Enum)
--- "one" "two"  "three"  "four"  "five"  "six"  "seven"  "eight"  "nine"  "zero"
-
-
--- the inputs of the function must belong to Eq TypeClass 
--- the function returns the index of the first letter of the word.
 
 findString :: (Eq a) => [a] -> [a] -> Int
 findString search str = fromJust $ findIndex (isPrefixOf search) (tails str)
@@ -39,7 +34,18 @@ replace n str  =
   word = map toLower (show n)
   in take pos str ++ digit ++ drop (pos + length word) str
 
--- :: "eighttwothree" -> "8twothree" -> "823"
+replaceAll str =
+  let
+  replaceZero = replace Zero str
+  -- replaceOne = replace One replaceZero
+  -- replaceTwo = replace Two replaceOne
+  -- replaceThree = replace Three replaceTwo
+  in replace One replaceZero
+
+-- fold the list of inputs on it fold the list of digits.
+-- git the list of digits
+
+-- :: "eightwothree" -> 8wothree" -> "8wo3"
 -- :: "zoneight234" -> "z1ight234"
 -- getCorrectedCalibrationValues :: [[Char]] -> [Int]
 -- getCorrectedCalibrationValues  = findString $ replaceWordWithDigit
