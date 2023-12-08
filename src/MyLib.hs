@@ -37,7 +37,7 @@ replace n str  =
   pos = findString word str
   digit = show (fromEnum n)
   word = map toLower (show n)
-  in take pos str ++ digit ++ drop (length word) str
+  in take pos str ++ digit ++ drop (pos + length word) str
 
 -- :: "eighttwothree" -> "8twothree" -> "823"
 -- :: "zoneight234" -> "z1ight234"

@@ -29,7 +29,7 @@ tests  = testGroup "tests"
     MyLib.findString (map toLower (show MyLib.Two)) (head testVals2) @?= 0
     ,
     testCase "task2: replace two with 2" $ 
-    MyLib.replace MyLib.Two (testVals2 !! 1)  @?= "21nine"
+    MyLib.replace MyLib.Two (head testVals2)  @?= "21nine"
     ,
     testCase "task2: replace two with 2 in eighttwothree" $
     MyLib.replace MyLib.Two (testVals2 !! 1)  @?= "eight2three"
