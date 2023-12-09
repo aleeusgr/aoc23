@@ -30,9 +30,12 @@ testVals2 = ["two1nine" , "eightwothree" , "abcone2threexyz", "xtwone3four", "4n
 digs = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
 dt = testVals2 !! 1
-dig = digs !! 1
+dig = digs !! 8
 
--- isSubsequenceOf does not work because it returns finds two before eight in eighttwothree 
+-- isSubsequenceOf does not work because it finds two before eight in eightwothree 
+-- my function must be more simple
+
+-- compare str dn = 
 
 
 --
