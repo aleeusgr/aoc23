@@ -36,7 +36,14 @@ dig = digs !! 8
 -- my function must be more simple
 
 -- compare str dn = 
+-- compare "eightwothree" "eigth" = "8wothree"
+-- if the number word runs out means it is match, we must add tail to the digit name elsewhere
+myCompare str [] = tail str 
+-- if 
+myCompare str dn =  (head str == head dn) && myCompare tail str tail dn 
 
+-- if head str == head dName then compare tail str tail dName
+-- else compare str to nextdName
 
 --
 -- :: "t" -> "z" -> False
