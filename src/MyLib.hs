@@ -1,4 +1,4 @@
-module MyLib (getCalibrationValues, Digits(..), getCorrectedCalibrationValues, function) where
+module MyLib (getCalibrationValues, Digits(..), getCorrectedCalibrationValues, findAndReplaceFirstOccurrence) where
 
 import Data.Char
 import Data.List
@@ -19,8 +19,8 @@ getCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsIn
 
 data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nine deriving (Show, Enum)
 
-replaceWordWithDigit :: [Char] -> [Char]
-replaceWordWithDigit x = case x of 
+wordToDigit :: [Char] -> [Char]
+wordToDigit x = case x of 
   "one"   -> "1"
   "two"   -> "2"
   "three" -> "3"
@@ -46,19 +46,21 @@ digs = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", 
 tv = testVals2 !! 1
 dig = digs !! 8
 
-function :: [Char] -> [String] -> [Char]
-function tv [] = head tv : function (tail tv) digs 
-function tv digs = let
+-- this function parses once, but now I need to rerun it until I can say there are no words left in the string.
+findAndReplaceFirstOccurrence :: [Char] -> [String] -> [Char]
+findAndReplaceFirstOccurrence tv [] = head tv : findAndReplaceFirstOccurrence (tail tv) digs 
+findAndReplaceFirstOccurrence tv digs = let
   dig = head digs
   l = length dig
   in
-  if dig == take l tv then replaceWordWithDigit dig ++ drop l tv 
-  else function tv (tail digs)
+  if dig == take l tv then wordToDigit dig ++ drop l tv 
+  else findAndReplaceFirstOccurrence tv (tail digs)
 
--- 8wothree
---
---
---
+-- findAndReplaceAll tv = let
+--   digs = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+--   if length tv > 2 then 
+
+
 -- getCorrectedCalibrationValues :: [[Char]] -> [Int]
 getCorrectedCalibrationValues x = x
 -- getCorrectedCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries (map replaceAll xs)
