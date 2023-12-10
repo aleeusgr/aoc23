@@ -1,4 +1,4 @@
-module MyLib (getCalibrationValues, Digits (..), getCorrectedCalibrationValues, findAndReplaceFirstOccurrence) where
+module MyLib (getCalibrationValues, Digits (..), getCorrectedCalibrationValues, findAndReplaceNumber) where
 
 import Data.Char
 import Data.List
@@ -48,20 +48,20 @@ dig = digs !! 8
 
 -- this function parses once, but now I need to rerun it until I can say there are no words left in the string.
 findAndReplaceNumber :: [Char] -> [String] -> [Char]
-findAndReplaceNumber tv [] = head tv : findAndReplaceFirstOccurrence (tail tv) digs
+findAndReplaceNumber tv [] = head tv : findAndReplaceNumber (tail tv) digs
 findAndReplaceNumber tv digs =
     let dig = head digs
         l = length dig
      in if dig == take l tv
             then wordToDigit dig ++ drop l tv
-            else findAndReplaceFirstOccurrence tv (tail digs)
+            else findAndReplaceNumber tv (tail digs)
 
 getDigitsInWord tv = map (`isSubsequenceOf` tv) digs
 
 findAndReplaceAll word =
     let digitList = getDigitsInWord word
-     in if any True digitList
-            then findAndReplaceNumber word digs
+     in if True `elem` digitList
+            then findAndReplaceAll (findAndReplaceNumber word digs)
             else word
 
 --   if length tv > 2 then
