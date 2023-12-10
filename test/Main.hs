@@ -1,6 +1,6 @@
 import Test.Tasty
 import Test.Tasty.HUnit
-import qualified MyLib (getCalibrationValues, getCorrectedCalibrationValues, findAndReplaceFirstOccurrence)
+import qualified MyLib (getCalibrationValues, getCorrectedCalibrationValues)
 
 -- TODO: make it work and have task one validate 56397
 -- acquire :: IO [String]
@@ -18,14 +18,8 @@ tests  = testGroup "tests"
     [ testCase "task1: the sum of calibration numbers is correct" $ 
     sum ( MyLib.getCalibrationValues testVals1) @?= 142
     ,
-    testCase "task2: parser" $
-    MyLib.findAndReplaceFirstOccurrence "eightwothree" ["three", "eight"] @?= "8wothree"
-    ,
-    testCase "task2: parser" $
-    MyLib.findAndReplaceFirstOccurrence "8wothree" ["three", "eight"] @?= "8wo3"
-    -- ,
-    -- testCase "task2: getCorrectedCalibrationValues" $
-    -- MyLib.getCorrectedCalibrationValues testVals2 @?= [29, 83, 13, 24, 42, 14, 76]
+    testCase "task2: getCorrectedCalibrationValues" $
+    MyLib.getCorrectedCalibrationValues testVals2 @?= [29, 83, 13, 24, 42, 14, 76]
     ]
 
 main :: IO ()

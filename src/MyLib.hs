@@ -1,4 +1,4 @@
-module MyLib (getCalibrationValues, Digits (..), getCorrectedCalibrationValues, findAndReplaceNumber) where
+module MyLib (getCalibrationValues, Digits (..), getCorrectedCalibrationValues) where
 
 import Data.Char
 import Data.List
@@ -58,10 +58,10 @@ findAndReplaceNumber tv digs =
 
 getDigitsInWord tv = map (`isSubsequenceOf` tv) digs
 
-findAndReplaceAll word =
+correctCalibrationValues word =
     let digitList = getDigitsInWord word
      in if True `elem` digitList
-            then findAndReplaceAll (findAndReplaceNumber word digs)
+            then correctCalibrationValues (findAndReplaceNumber word digs)
             else word
 
 --   if length tv > 2 then
@@ -69,7 +69,6 @@ findAndReplaceAll word =
 --   else find and replace.
 --   map isSubsequenceOf
 
--- getCorrectedCalibrationValues :: [[Char]] -> [Int]
-getCorrectedCalibrationValues x = x
+getCorrectedCalibrationValues :: [[Char]] -> [Int]
 
--- getCorrectedCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries (map replaceAll xs)
+getCorrectedCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries (map correctCalibrationValues xs)
