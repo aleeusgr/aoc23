@@ -32,19 +32,11 @@ wordToDigit x = case x of
     "zero" -> "0"
     _ -> "err"
 
--- TODO:
--- dispDigits :: Digits -> Int
--- dispDigits x = toLower $ show x
--- this is cool, so what I misunderstand is list vs data, what is the relationship?
-
--- findString :: (Eq a) => [a] -> [a] -> Maybe Int
--- findString search str = findIndex (isPrefixOf search) (tails str)
-
 testVals2 = ["two1nine", "eightwothree", "abcone2threexyz", "xtwone3four", "4nineeightseven2", "zoneight234", "7pqrstsixteen"]
+
+digs :: [String]
 digs = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
-tv = testVals2 !! 1
-dig = digs !! 8
 
 -- this function parses once, but now I need to rerun it until I can say there are no words left in the string.
 findAndReplaceNumber :: [Char] -> [String] -> [Char]
@@ -56,19 +48,15 @@ findAndReplaceNumber tv digs =
             then wordToDigit dig ++ drop l tv
             else findAndReplaceNumber tv (tail digs)
 
+getDigitsInWord :: [Char] -> [Bool]
 getDigitsInWord tv = map (`isSubsequenceOf` tv) digs
 
+correctCalibrationValues :: [Char] -> [Char]
 correctCalibrationValues word =
     let digitList = getDigitsInWord word
      in if True `elem` digitList
             then correctCalibrationValues (findAndReplaceNumber word digs)
             else word
 
---   if length tv > 2 then
---   if string contains no words return string
---   else find and replace.
---   map isSubsequenceOf
-
 getCorrectedCalibrationValues :: [[Char]] -> [Int]
-
 getCorrectedCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries (map correctCalibrationValues xs)
