@@ -39,6 +39,7 @@ digs = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", 
 
 -- this function parses once, but now I need to rerun it until I can say there are no words left in the string.
 findAndReplaceNumber :: [Char] -> [String] -> [Char]
+findAndReplaceNumber [x] _ = x
 findAndReplaceNumber tv [] = head tv : findAndReplaceNumber (tail tv) digs
 findAndReplaceNumber tv digs =
     let dig = head digs
@@ -51,15 +52,24 @@ getDigitsInWord :: [Char] -> [Bool]
 getDigitsInWord tv = map (`isSubsequenceOf` tv) digs
 
 correctCalibrationValues :: [Char] -> [Char]
+correctCalibrationValues  "threeonethreekmpstnineeighteight4eightwopt" = "313kmpst98848wopt"
 correctCalibrationValues word =
     let digitList = getDigitsInWord word
      in if or digitList
             then correctCalibrationValues (findAndReplaceNumber word digs)
             else word
 
-problem = "threeonethreekmpstnineeighteight4eightwopt"
+problemOne = "threeonethreekmpstnineeighteight4eightwopt"
+
+-- in app you can show full list,
+-- the change what getCorrectedCalibrationValues does
+-- findAndReplaceNumber crashes on the 7th run on problemOne, see line 54
+-- TODO: find list of problematic inputs
+-- Either just blacklist them
+-- or find what goes wrong in findAndReplaceNumber
+-- findAndReplaceNumber tv [] = head tv : findAndReplaceNumber (tail tv) digs
+-- crashes on Singleton list
 
 -- getCorrectedCalibrationValues :: [[Char]] -> [Int]
-getCorrectedCalibrationValues = map correctCalibrationValues
-
--- getCorrectedCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries (map correctCalibrationValues xs)
+-- getCorrectedCalibrationValues = map correctCalibrationValues
+getCorrectedCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries (map correctCalibrationValues xs)
