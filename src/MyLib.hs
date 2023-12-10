@@ -1,4 +1,4 @@
-module MyLib (getCalibrationValues, Digits(..), getCorrectedCalibrationValues) where
+module MyLib (getCalibrationValues, Digits(..), getCorrectedCalibrationValues, function) where
 
 import Data.Char
 import Data.List
@@ -18,6 +18,20 @@ getCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsIn
 
 
 data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nine deriving (Show, Enum)
+
+replaceWordWithDigit :: [Char] -> [Char]
+replaceWordWithDigit x = case x of 
+  "one"   -> "1"
+  "two"   -> "2"
+  "three" -> "3"
+  "four"  -> "4"
+  "five"  -> "5"
+  "six"   -> "6"
+  "seven" -> "7"
+  "eight" -> "8"
+  "nine"  -> "9"
+  "zero"  -> "0"
+  _      -> "err"
 -- TODO:
 -- dispDigits :: Digits -> Int
 -- dispDigits x = toLower $ show x
@@ -29,8 +43,17 @@ data Digits = Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nin
 testVals2 = ["two1nine" , "eightwothree" , "abcone2threexyz", "xtwone3four", "4nineeightseven2", "zoneight234", "7pqrstsixteen"]
 digs = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
-dt = testVals2 !! 1
+tv = testVals2 !! 1
 dig = digs !! 8
+
+function :: [Char] -> [String] -> [Char]
+function tv [] = function (tail tv) digs 
+function tv digs = let
+  dig = head digs
+  l = length dig
+  in
+  if dig == take l tv then replaceWordWithDigit dig ++ drop l tv 
+  else head tv : function tv (tail digs)
 
 -- isSubsequenceOf does not work because it finds two before eight in eightwothree 
 -- my function must be more simple
@@ -38,9 +61,9 @@ dig = digs !! 8
 -- compare str dn = 
 -- compare "eightwothree" "eigth" = "8wothree"
 -- if the number word runs out means it is match, we must add tail to the digit name elsewhere
-myCompare str [] = tail str 
+-- myCompare str [] = tail str 
 -- if 
-myCompare str dn =  (head str == head dn) && myCompare tail str tail dn 
+-- myCompare str dn =  (head str == head dn) && myCompare tail str tail dn 
 
 -- if head str == head dName then compare tail str tail dName
 -- else compare str to nextdName
