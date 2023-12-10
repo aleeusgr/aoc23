@@ -37,7 +37,6 @@ testVals2 = ["two1nine", "eightwothree", "abcone2threexyz", "xtwone3four", "4nin
 digs :: [String]
 digs = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
-
 -- this function parses once, but now I need to rerun it until I can say there are no words left in the string.
 findAndReplaceNumber :: [Char] -> [String] -> [Char]
 findAndReplaceNumber tv [] = head tv : findAndReplaceNumber (tail tv) digs
@@ -54,9 +53,13 @@ getDigitsInWord tv = map (`isSubsequenceOf` tv) digs
 correctCalibrationValues :: [Char] -> [Char]
 correctCalibrationValues word =
     let digitList = getDigitsInWord word
-     in if True `elem` digitList
+     in if or digitList
             then correctCalibrationValues (findAndReplaceNumber word digs)
             else word
 
-getCorrectedCalibrationValues :: [[Char]] -> [Int]
-getCorrectedCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries (map correctCalibrationValues xs)
+problem = "threeonethreekmpstnineeighteight4eightwopt"
+
+-- getCorrectedCalibrationValues :: [[Char]] -> [Int]
+getCorrectedCalibrationValues = map correctCalibrationValues
+
+-- getCorrectedCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries (map correctCalibrationValues xs)
