@@ -1,4 +1,4 @@
-module MyLib (getCalibrationValues, Digits (..), getCorrectedCalibrationValues) where
+module MyLib (getCalibrationValues, Digits (..), getCorrectedCalibrationValues, findAndReplaceNumber) where
 
 import Data.Char
 import Data.List
@@ -39,7 +39,7 @@ digs = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", 
 
 -- this function parses once, but now I need to rerun it until I can say there are no words left in the string.
 findAndReplaceNumber :: [Char] -> [String] -> [Char]
-findAndReplaceNumber [x] _ = x
+findAndReplaceNumber [x] [] = [x]
 findAndReplaceNumber tv [] = head tv : findAndReplaceNumber (tail tv) digs
 findAndReplaceNumber tv digs =
     let dig = head digs
