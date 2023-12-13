@@ -1,8 +1,12 @@
 module MyLib (getCalibrationValues, Digits (..), getCorrectedCalibrationValues) where
 
+{-# LANGUAGE TemplateHaskell, ViewPatterns, PartialTypeSignatures #-}
+{-# OPTIONS_GHC -Wno-partial-type-signatures #-}
+
 import Data.Char
 import Data.List
 import Data.Maybe
+import Debug
 
 getDigitsInEntries :: [[Char]] -> [[Char]]
 getDigitsInEntries = map (filter isDigit)
