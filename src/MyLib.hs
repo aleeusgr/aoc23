@@ -59,6 +59,7 @@ correctCalibrationValues word =
             else word
 
 problemOne = "threeonethreekmpstnineeighteight4eightwopt"
+problemTwo = "85dntjeightwom" --Thanks Fraser Tweedale
 
 -- in app you can show full list,
 -- the change what getCorrectedCalibrationValues does
