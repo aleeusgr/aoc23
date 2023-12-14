@@ -1,12 +1,12 @@
 module MyLib (getCalibrationValues, Digits (..), getCorrectedCalibrationValues) where
 
-{-# LANGUAGE TemplateHaskell, ViewPatterns, PartialTypeSignatures #-}
-{-# OPTIONS_GHC -Wno-partial-type-signatures #-}
+-- {-# LANGUAGE TemplateHaskell, ViewPatterns, PartialTypeSignatures #-}
+-- {-# OPTIONS_GHC -Wno-partial-type-signatures #-}
 
 import Data.Char
 import Data.List
-import Data.Maybe
-import Debug
+-- import Data.Maybe
+-- import Debug
 
 getDigitsInEntries :: [[Char]] -> [[Char]]
 getDigitsInEntries = map (filter isDigit)
@@ -43,6 +43,7 @@ digs = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", 
 
 -- this function parses once, but now I need to rerun it until I can say there are no words left in the string.
 findAndReplaceNumber :: [Char] -> [String] -> [Char]
+findAndReplaceNumber [] _ = "1"
 findAndReplaceNumber tv [] = head tv : findAndReplaceNumber (tail tv) digs
 findAndReplaceNumber tv digs =
     let dig = head digs
@@ -55,15 +56,15 @@ getDigitsInWord :: [Char] -> [Bool]
 getDigitsInWord tv = map (`isSubsequenceOf` tv) digs
 
 correctCalibrationValues :: [Char] -> [Char]
-correctCalibrationValues  "threeonethreekmpstnineeighteight4eightwopt" = "313kmpst98848wopt"
+-- correctCalibrationValues  "threeonethreekmpstnineeighteight4eightwopt" = "313kmpst98848wopt"
 correctCalibrationValues word =
-    let digitList = getDigitsInWord word
-     in if or digitList
+      if or $ getDigitsInWord word
             then correctCalibrationValues (findAndReplaceNumber word digs)
             else word
 
-problemOne = "threeonethreekmpstnineeighteight4eightwopt"
-problemTwo = "85dntjeightwom" --Thanks Fraser Tweedale
+p1 = "threeonethreekmpstnineeighteight4eightwopt"
+p2 = "313kmpst98848wopt"
+p3 = "85dntjeightwom" --Thanks Fraser Tweedale
 
 -- in app you can show full list,
 -- the change what getCorrectedCalibrationValues does
@@ -74,6 +75,6 @@ problemTwo = "85dntjeightwom" --Thanks Fraser Tweedale
 -- findAndReplaceNumber tv [] = head tv : findAndReplaceNumber (tail tv) digs
 -- crashes on Singleton list
 
--- getCorrectedCalibrationValues :: [[Char]] -> [Int]
+getCorrectedCalibrationValues :: [[Char]] -> [Int]
 -- getCorrectedCalibrationValues = map correctCalibrationValues
 getCorrectedCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries (map correctCalibrationValues xs)
