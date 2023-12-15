@@ -1,4 +1,4 @@
-module MyLib (getCalibrationValues, Digits (..), getCorrectedCalibrationValues, findAndReplaceNumber) where
+module MyLib (getCalibrationValues, getCorrectedCalibrationValues, findAndReplaceNumber, correctCalibrationValues) where
 
 -- {-# LANGUAGE TemplateHaskell, ViewPatterns, PartialTypeSignatures #-}
 -- {-# OPTIONS_GHC -Wno-partial-type-signatures #-}
