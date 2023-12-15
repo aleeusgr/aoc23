@@ -1,5 +1,6 @@
 import Test.Tasty
 import Test.Tasty.HUnit
+import Test.Tasty.QuickCheck as QC
 import qualified MyLib (findAndReplaceNumber, getCalibrationValues, getCorrectedCalibrationValues)
 
 -- TODO: make it work and have task one validate 56397
@@ -14,7 +15,7 @@ testVals2 = ["two1nine", "eightwothree", "abcone2threexyz", "xtwone3four",
              "4nineeightseven2", "zoneight234", "7pqrstsixteen"]
 
 tests :: TestTree
-tests = testGroup "All" [unitTests]
+tests = testGroup "All" [unitTests, qcProps]
 
 unitTests :: TestTree
 unitTests  = testGroup "unit tests"
@@ -24,6 +25,15 @@ unitTests  = testGroup "unit tests"
     testCase "task2: getCorrectedCalibrationValues" $
     MyLib.getCorrectedCalibrationValues testVals2 @?= [29, 83, 13, 24, 42, 14, 76]
     ]
+
+qcProps = testGroup "(checked by QuickCheck)"
+  [  QC.testProperty "Fermat's little theorem" $
+      \x -> ((x :: Integer)^7 - x) `mod` 7 == 0
+  -- the following property does not hold
+  , QC.testProperty "Fermat's last theorem" $
+      \x y z n ->
+        (n :: Integer) >= 3 QC.==> x^n + y^n /= (z^n :: Integer)
+  ]
 
 main :: IO ()
 main = defaultMain tests
