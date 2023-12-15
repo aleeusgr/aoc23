@@ -65,6 +65,7 @@ correctCalibrationValues word =
 p1 = "threeonethreekmpstnineeighteight4eightwopt"
 p2 = "313kmpst98848wopt"
 p3 = "85dntjeightwom" --Thanks Fraser Tweedale
+ps = ["twao", "siax"]
 
 -- in app you can show full list,
 -- the change what getCorrectedCalibrationValues does
