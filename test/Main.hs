@@ -1,6 +1,6 @@
 import Test.Tasty
 import Test.Tasty.HUnit
-import qualified MyLib (getCalibrationValues, getCorrectedCalibrationValues)
+import qualified MyLib (findAndReplaceNumber, getCalibrationValues, getCorrectedCalibrationValues)
 
 -- TODO: make it work and have task one validate 56397
 -- acquire :: IO [String]
@@ -14,7 +14,10 @@ testVals2 = ["two1nine", "eightwothree", "abcone2threexyz", "xtwone3four",
              "4nineeightseven2", "zoneight234", "7pqrstsixteen"]
 
 tests :: TestTree
-tests  = testGroup "tests"
+tests = testGroup "All" [unitTests]
+
+unitTests :: TestTree
+unitTests  = testGroup "unit tests"
     [ testCase "task1: the sum of calibration numbers is correct" $ 
     sum ( MyLib.getCalibrationValues testVals1) @?= 142
     ,
