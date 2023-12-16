@@ -55,6 +55,13 @@ findAndReplaceNumber tv digs =
 getDigitsInWord :: [Char] -> [Bool]
 getDigitsInWord tv = map (`isSubsequenceOf` tv) digs
 
+findString :: (Eq a) => [a] -> [a] -> Maybe Int
+findString search str = findIndex (isPrefixOf search) (tails str)
+
+findNumbers tv = map (`findString` tv) digs 
+-- stringContainsNumberNames ::
+-- stringContainsNumberNames = 
+
 correctCalibrationValues :: [Char] -> [Char]
 correctCalibrationValues word =
       if or $ getDigitsInWord word --any of the digs are found in the string.
