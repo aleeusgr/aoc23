@@ -1,12 +1,8 @@
 module MyLib (getCalibrationValues, getCorrectedCalibrationValues, findAndReplaceNumber, correctCalibrationValues) where
 
--- {-# LANGUAGE TemplateHaskell, ViewPatterns, PartialTypeSignatures #-}
--- {-# OPTIONS_GHC -Wno-partial-type-signatures #-}
-
 import Data.Char
 import Data.List
--- import Data.Maybe
--- import Debug
+import Data.Maybe
 
 getDigitsInEntries :: [[Char]] -> [[Char]]
 getDigitsInEntries = map (filter isDigit)
@@ -41,9 +37,7 @@ testVals2 = ["two1nine", "eightwothree", "abcone2threexyz", "xtwone3four", "4nin
 digs :: [String]
 digs = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
--- this function parses once, but now I need to rerun it until I can say there are no words left in the string.
 findAndReplaceNumber :: [Char] -> [String] -> [Char]
--- findAndReplaceNumber [] _ = ""
 findAndReplaceNumber tv [] = head tv : findAndReplaceNumber (tail tv) digs
 findAndReplaceNumber tv digs =
     let dig = head digs
@@ -52,33 +46,17 @@ findAndReplaceNumber tv digs =
             then wordToDigit dig ++ drop l tv
             else findAndReplaceNumber tv (tail digs)
 
-getDigitsInWord :: [Char] -> [Bool]
-getDigitsInWord tv = map (`isSubsequenceOf` tv) digs
-
 findString :: (Eq a) => [a] -> [a] -> Maybe Int
 findString search str = findIndex (isPrefixOf search) (tails str)
 
-findNumbers tv = map (`findString` tv) digs 
--- stringContainsNumberNames ::
--- stringContainsNumberNames = 
+wordContainsNumberNames :: [Char] -> Bool
+wordContainsNumberNames tv = any (isJust . (`findString` tv)) digs
 
 correctCalibrationValues :: [Char] -> [Char]
 correctCalibrationValues word =
-      if or $ getDigitsInWord word --any of the digs are found in the string.
+      if wordContainsNumberNames word --any of the digs are found in the string.
             then correctCalibrationValues (findAndReplaceNumber word digs)
             else word
 
-p1 = "threeonethreekmpstnineeighteight4eightwopt"
-p2 = "313kmpst98848wopt"
-p3 = "85dntjeightwom" --Thanks Fraser Tweedale
-ps = ["twao", "siax"]
-
--- TODO: find list of problematic inputs
--- Either just blacklist them
--- or find what goes wrong in findAndReplaceNumber
--- findAndReplaceNumber tv [] = head tv : findAndReplaceNumber (tail tv) digs
--- crashes on empty list
-
 getCorrectedCalibrationValues :: [[Char]] -> [Int]
--- getCorrectedCalibrationValues = map correctCalibrationValues
 getCorrectedCalibrationValues xs = intList $ map convertToCalibrationValues $ getDigitsInEntries (map correctCalibrationValues xs)
