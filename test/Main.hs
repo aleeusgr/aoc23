@@ -1,7 +1,7 @@
 import Test.Tasty
 import Test.Tasty.HUnit
 import Test.Tasty.QuickCheck as QC
-import qualified MyLib (getCalibrationValues, getCorrectedCalibrationValues, findAndReplaceNumber, correctCalibrationValues)
+import qualified MyLib (getCalibrationValues, getCorrectedCalibrationValues, correctCalibrationValues)
 
 -- TODO: make it work and have task one validate 56397
 -- acquire :: IO [String]
@@ -33,9 +33,6 @@ qcProps = testGroup "(checked by QuickCheck)"
   [
       QC.testProperty "correctCalibrationValues returns ..." $
       \x -> length (MyLib.correctCalibrationValues x :: [Char] )  <= length x
-      -- ,
-      -- QC.testProperty "findAndReplaceNumber returns ..." $
-      -- \x -> length (MyLib.findAndReplaceNumber (x :: [Char]) digs )  <= length x
   ]
 
 main :: IO ()
