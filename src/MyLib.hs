@@ -56,9 +56,8 @@ getDigitsInWord :: [Char] -> [Bool]
 getDigitsInWord tv = map (`isSubsequenceOf` tv) digs
 
 correctCalibrationValues :: [Char] -> [Char]
--- correctCalibrationValues  "threeonethreekmpstnineeighteight4eightwopt" = "313kmpst98848wopt"
 correctCalibrationValues word =
-      if or $ getDigitsInWord word
+      if or $ getDigitsInWord word --any of the digs are found in the string.
             then correctCalibrationValues (findAndReplaceNumber word digs)
             else word
 
@@ -67,14 +66,11 @@ p2 = "313kmpst98848wopt"
 p3 = "85dntjeightwom" --Thanks Fraser Tweedale
 ps = ["twao", "siax"]
 
--- in app you can show full list,
--- the change what getCorrectedCalibrationValues does
--- findAndReplaceNumber crashes on the 7th run on problemOne, see line 54
 -- TODO: find list of problematic inputs
 -- Either just blacklist them
 -- or find what goes wrong in findAndReplaceNumber
 -- findAndReplaceNumber tv [] = head tv : findAndReplaceNumber (tail tv) digs
--- crashes on Singleton list
+-- crashes on empty list
 
 getCorrectedCalibrationValues :: [[Char]] -> [Int]
 -- getCorrectedCalibrationValues = map correctCalibrationValues
